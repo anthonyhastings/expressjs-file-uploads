@@ -1,0 +1,23 @@
+{
+    "name": "expressjs-file-uploads",
+    "description": "An example of accepting file uploads via ExpressJS.",
+    "version": "1.0.0",
+    "license": "MIT",
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:antwan1986/expressjs-file-uploads.git"
+    },
+    "authors": [
+        "Anthony Hastings <ar.hastings@gmail.com>"
+    ],
+    "dependencies": {
+    },
+    "devDependencies": {
+        "mkdirp": "~0.5.1",
+        "express": "~4.12.4",
+        "body-parser": "~1.12.4",
+        "multer": "~0.1.8",
+        "jade": "~1.10.0"
+    }
+}

@@ -1,0 +1,6 @@
+.DS_Store
+Thumbs.db
+.sass-cache
+.*.sw[a-z]
+node_modules/
+uploads/

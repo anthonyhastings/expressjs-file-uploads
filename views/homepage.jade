@@ -1,0 +1,17 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width,minimal-ui,initial-scale=1.0,maximum-scale=1.0,user-scalable=no")
+        title="ExpressJS: File Uploads"
+    body
+        div(class="js-main-container")
+
+            form(class="js-form", method="POST", action="/api/upload")
+                input(type="hidden", name="testHidden", value="Hello World!")
+                input(type="file", name="testFile", required)
+                button(type="submit", class="js-submit") Submit
+
+            progress(class="js-progress", max="100" value="0")
+
+        script(src="/assets/js/homepage.js")
