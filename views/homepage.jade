@@ -12,6 +12,14 @@ html(lang="en")
                 input(type="file", name="testFile", required)
                 button(type="submit", class="js-submit") Submit
 
-            progress(class="js-progress", max="100" value="0")
+            div(class="js-download-indicator")
+                strong Download:
+                progress(class="js-download-meter", max="100" value="0")
+                span(class="js-download-text") 0 Bytes / 0 Bytes
+
+            div(class="js-upload-indicator")
+                strong Upload:
+                progress(class="js-upload-meter", max="100" value="0")
+                span(class="js-upload-text") 0 Bytes / 0 Bytes
 
         script(src="/assets/js/homepage.js")

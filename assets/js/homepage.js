@@ -1,6 +1,25 @@
+/**
+ * Formats Bytes into a particular format.
+ *
+ * @param  {[int]} bytes
+ * @param  {[int]} decimals
+ * @return string
+ */
+function formatBytes(bytes,decimals) {
+   if(bytes == 0) return '0 Byte';
+   var k = 1000;
+   var dm = decimals + 1 || 3;
+   var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+   var i = Math.floor(Math.log(bytes) / Math.log(k));
+   return (bytes / Math.pow(k, i)).toPrecision(dm) + ' ' + sizes[i];
+};
+
 // Caching selectors.
 var formElement = document.querySelector('.js-form'),
-    progressElement = document.querySelector('.js-progress')
+    downloadProgressElement = document.querySelector('.js-download-meter'),
+    downloadTextElement = document.querySelector('.js-download-text'),
+    uploadProgressElement = document.querySelector('.js-upload-meter'),
+    uploadTextElement = document.querySelector('.js-upload-text'),
     submitElement = document.querySelector('.js-submit');
 
 /**
@@ -23,10 +42,24 @@ formElement.addEventListener('submit', function(event) {
         submitElement.disabled = true;
     }, false);
 
-    // Progress listener.
+    // Progress listener (download).
     request.addEventListener('progress', function(event) {
-        console.info('XHR::progress', event);
-        progressElement.setAttribute('value', (event.loaded / event.total) * 100);
+        var totalLoadedKB = formatBytes(event.loaded, 2),
+            totalSizeKB = formatBytes(event.total, 2);
+
+        console.info('XHR::progress (download)', event);
+        downloadProgressElement.setAttribute('value', (event.loaded / event.total) * 100);
+        downloadTextElement.innerHTML = totalLoadedKB + ' / ' + totalSizeKB;
+    }, false);
+
+    // Progress listener (upload).
+    request.upload.addEventListener('progress', function(event) {
+        var totalLoadedKB = formatBytes(event.loaded, 2),
+            totalSizeKB = formatBytes(event.total, 2);
+
+        console.info('XHR::progress (upload)', event);
+        uploadProgressElement.setAttribute('value', (event.loaded / event.total) * 100);
+        uploadTextElement.innerHTML = totalLoadedKB + ' / ' + totalSizeKB;
     }, false);
 
     // Picking up the HTTP method and endpoint from the form attributes.
